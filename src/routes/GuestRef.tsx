@@ -2,15 +2,19 @@ import { useState, useEffect } from "react";
 import { cdpUrl, baseUrl, apiToken, clientKey } from "../constants/cdpenv";
 import axios from "axios";
 import { GuestData } from "../interfaces/GuestData";
+import { useParams,Link } from 'react-router-dom';
 
 const GuestRef: React.FC = () => {
   const [guest, setGuest] = useState<GuestData | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { userId } = useParams();
 
-  const userGuid = "6cfa0297-50bd-4b38-80fc-913a7488b9a8";
-  const apiUrl = baseUrl + "/v2/guests/" + userGuid;
-  const previewUrl = cdpUrl + "/#/guests/" + userGuid;
+  const guestRef = userId;
+  // const guestRef = "6cfa0297-50bd-4b38-80fc-913a7488b9a8";
+  const apiUrl = baseUrl + "/v2/guests/" + guestRef;
+  const previewUrl = cdpUrl + "/#/guests/" + guestRef;
 
+  
   useEffect(() => {
     const authHeader = {
       username: clientKey,
@@ -29,10 +33,12 @@ const GuestRef: React.FC = () => {
   return (
     <>
       <p>
-        More detail <a href={previewUrl}>{userGuid}</a>
+        More detail <a href={previewUrl}>{guestRef}</a>
       </p>
-      {error && <p>{error}</p>}
+      {error && <><p>{error}</p>      <p>User ID: {userId}</p></>
+}
       {guest && (
+        <>
         <div>
           <p>Guest Type: {guest.guestType}</p>
           {guest.nationality === "Japan" ? (
@@ -52,6 +58,8 @@ const GuestRef: React.FC = () => {
           <p>language: {guest.language}</p>
 
         </div>
+        <Link to="/">Home</Link>
+        </>
       )}
     </>
   );
