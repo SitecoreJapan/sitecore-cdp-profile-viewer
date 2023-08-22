@@ -1,33 +1,47 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import { baseUrl } from "./constants/cdpenv";
+import { useState, useEffect } from "react";
+import { baseUrl, apiToken, clientKey } from "./constants/cdpenv";
+import axios from "axios";
+
+interface GuestData {
+  firstName: string;
+  // 他のプロパティも追加
+}
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [guest, setGuest] = useState<GuestData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const userGuid = "6cfa0297-50bd-4b38-80fc-913a7488b9a8";
+  const apiUrl = baseUrl + "/v2/guests/" + userGuid;
+  const cdpUrl = baseUrl + "/guests/" + userGuid;
+
+  useEffect(() => {
+    const authHeader = {
+      username: clientKey,
+      password: apiToken,
+    };
+
+    axios
+      .get<GuestData>(apiUrl, { auth: authHeader })
+      .then((response) => setGuest(response.data))
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setError("データを取得できませんでした。");
+      });
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>{baseUrl}</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+      <p>
+        More detail <a href={cdpUrl}>{userGuid}</a>
       </p>
+      {error && <p>{error}</p>}
+      {guest && (
+        <div>
+          <p>First Name: {guest.firstName}</p>
+          {/* 他の情報も表示 */}
+        </div>
+      )}
     </>
   );
 }
