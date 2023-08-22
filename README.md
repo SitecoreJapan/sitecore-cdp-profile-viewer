@@ -9,6 +9,7 @@
 This application is provided as a sample to display Sitecore CDP profile information.
 
 ## Prerequisites
+
 ### Node.js
 
 This application needs to have Node.js installed to build the project. We recommend using the LTS version of Node.js. You can find the latest version of Node.js [here](https://nodejs.org/en/).
@@ -29,6 +30,7 @@ VITE_API_TOKEN=<your api token>
 ## Quick start
 
 To start using `Sitecore CDP Profile Viewer`:
+
 1. Install [Node.js](htts://nodejs.org/en/). We recommend the LTS version.
 2. Clone the repository: `git clone git@github.com:SitecoreJapan/sitecore-cdp-profile-viewer`.
 3. In the repository, to install all dependencies, run `npm install`.
