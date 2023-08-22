@@ -1,60 +1,20 @@
-import { useState, useEffect } from "react";
-import { cdpUrl, baseUrl, apiToken, clientKey } from "./constants/cdpenv";
-import axios from "axios";
-import { GuestData } from "./interfaces/GuestData";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './routes/Home';
+import GuestRef from './routes/guestRef';
+import NotFound from './routes/NotFound';
 
-function App() {
-  const [guest, setGuest] = useState<GuestData | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  const userGuid = "6cfa0297-50bd-4b38-80fc-913a7488b9a8";
-  const apiUrl = baseUrl + "/v2/guests/" + userGuid;
-  const previewUrl = cdpUrl + "/#/guests/" + userGuid;
-
-  useEffect(() => {
-    const authHeader = {
-      username: clientKey,
-      password: apiToken,
-    };
-
-    axios
-      .get<GuestData>(apiUrl, { auth: authHeader })
-      .then((response) => setGuest(response.data))
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setError("データを取得できませんでした。");
-      });
-  }, []);
+const App: React.FC = () => {
 
   return (
-    <>
-      <p>
-        More detail <a href={previewUrl}>{userGuid}</a>
-      </p>
-      {error && <p>{error}</p>}
-      {guest && (
-        <div>
-          <p>Guest Type: {guest.guestType}</p>
-          {guest.nationality === "Japan" ? (
-        <p>Full Name: {guest.firstName} {guest.lastName}</p>
-      ) : (
-        <p>Full Name: {guest.title} {guest.lastName} {guest.firstName}</p>
-      )}
-                {guest.nationality === "Japan" ? (
-        <p>Address: {guest.zipCode} {guest.state} {guest.city}</p>
-      ) : (
-        <p>Address: {guest.city} {guest.state} {guest.country} {guest.zipCode}</p>
-      )}
-
-          <p>gender: {guest.gender}</p>
-          <p>dateOfBirth: {guest.dateOfBirth}</p>
-          <p>Nationality: {guest.nationality}</p>
-          <p>language: {guest.language}</p>
-
-        </div>
-      )}
-    </>
-  );
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/guestRef" element={<GuestRef />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  )
 }
 
-export default App;
+export default App
