@@ -10,7 +10,6 @@ import {
   CardFooter,
   Divider,
   Link,
-  Image,
   Button,
 } from '@nextui-org/react';
 
