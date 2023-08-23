@@ -1,14 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, Input } from '@nextui-org/react';
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
+  const [inputText, setInputText] = useState('');
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    // ボタンクリック時の処理
+    // テキスト入力の値を次のページに渡す
+    navigate(`/guests/${inputText}`);
+  };
+
   return (
-    <div>
-      <h1>Welcome to Home Page</h1>
-      <p>This is the content of the home page.</p>
-      <Link to="/guestRef/6cfa0297-50bd-4b38-80fc-913a7488b9a8">Profile 1</Link>
-      <Link to="/guestRef/32c0acf1-838a-4925-8ca5-39f0eab4350f">Profile 2</Link>
-    </div>
+    <>
+      <div className="mx-auto max-w-2xl text-center">
+        <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900">
+          Sitecore CDP Profile Viewer
+        </h1>
+        <Input
+          type="text"
+          value={inputText}
+          label="Guest ID"
+          onChange={(e) => setInputText(e.target.value)}
+        />
+        <Button color="primary" onClick={handleButtonClick}>
+          Check
+        </Button>
+
+        <p>Sample GuestID : 6cfa0297-50bd-4b38-80fc-913a7488b9a8</p>
+      </div>
+    </>
   );
 };
 
