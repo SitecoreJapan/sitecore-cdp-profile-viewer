@@ -16,17 +16,13 @@ import {
 const GuestRef: React.FC = () => {
   const [guest, setGuest] = useState<GuestData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { userId } = useParams();
+  const { guestRef } = useParams();
 
-  const guestRef = userId;
-  // const guestRef = "6cfa0297-50bd-4b38-80fc-913a7488b9a8";
   const apiUrl = baseUrl + '/v2/guests/' + guestRef;
   const previewUrl = cdpUrl + '/#/guests/' + guestRef;
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    // ボタンクリック時の処理
-    // テキスト入力の値を次のページに渡す
     navigate(`/`);
   };
 

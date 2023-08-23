@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    // ボタンクリック時の処理
-    // テキスト入力の値を次のページに渡す
     navigate(`/`);
   };
   return (
