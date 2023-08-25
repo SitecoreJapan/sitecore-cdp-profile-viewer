@@ -18,10 +18,11 @@ const GuestRef: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { guestRef } = useParams();
 
-  const apiUrl = baseUrl + '/v2/guests/' + guestRef;
+  const apiGuestsUrl = baseUrl + '/v2/guests/' + guestRef;
   const previewUrl = cdpUrl + '/#/guests/' + guestRef;
 
   const navigate = useNavigate();
+
   const handleButtonClick = () => {
     navigate(`/`);
   };
@@ -33,7 +34,7 @@ const GuestRef: React.FC = () => {
     };
 
     axios
-      .get<GuestResponse>(apiUrl, { auth: authHeader })
+      .get<GuestResponse>(apiGuestsUrl, { auth: authHeader })
       .then((response) => setGuest(response.data))
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -90,6 +91,8 @@ const GuestRef: React.FC = () => {
               </CardBody>
               <Divider />
               <CardFooter>
+                <Link href={'/orders/' + guestRef}>Check Order</Link>
+                <div> : </div>
                 <Link isExternal showAnchorIcon href={previewUrl}>
                   More detail
                 </Link>

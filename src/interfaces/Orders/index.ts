@@ -1,8 +1,8 @@
-interface OrderItem {
+export interface OrderItem {
   href: string;
 }
 
-interface OrdersResponse {
+export interface OrdersResponse {
   href: string;
   offset: number;
   limit: number;
