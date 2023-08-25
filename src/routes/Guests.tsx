@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { cdpUrl, baseUrl, apiToken, clientKey } from '../constants/cdpenv';
 import axios from 'axios';
-import { GuestData } from '../interfaces/GuestData';
+import { GuestResponse } from '../interfaces/Guests';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   Card,
@@ -14,7 +14,7 @@ import {
 } from '@nextui-org/react';
 
 const GuestRef: React.FC = () => {
-  const [guest, setGuest] = useState<GuestData | null>(null);
+  const [guest, setGuest] = useState<GuestResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { guestRef } = useParams();
 
@@ -33,7 +33,7 @@ const GuestRef: React.FC = () => {
     };
 
     axios
-      .get<GuestData>(apiUrl, { auth: authHeader })
+      .get<GuestResponse>(apiUrl, { auth: authHeader })
       .then((response) => setGuest(response.data))
       .catch((error) => {
         console.error('Error fetching data:', error);
