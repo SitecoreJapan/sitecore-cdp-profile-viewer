@@ -25,6 +25,7 @@ VITE_CDP_URL=<your-cdp-url>
 VITE_BASE_URL=<your-region-api-base-url>
 VITE_CLIENT_KEY=<your client key>
 VITE_API_TOKEN=<your api token>
+VITE_GUEST_ID=6cfa0297-50bd-4b38-80fc-913a7488b9a8
 ```
 
 ## Quick start
@@ -41,6 +42,7 @@ VITE_CDP_URL=<your-cdp-url>
 VITE_BASE_URL=<your-region-api-base-url>
 VITE_CLIENT_KEY=<your client key>
 VITE_API_TOKEN=<your api token>
+VITE_GUEST_ID=<your sample guest id>
 ```
 
 5.  To start the development server, run `npm run dev`.

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
+import { guestSampleId } from '../constants/cdpenv';
 
 const Home: React.FC = () => {
   const [inputText, setInputText] = useState('');
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
           Check
         </Button>
 
-        <p>Sample GuestID : 6cfa0297-50bd-4b38-80fc-913a7488b9a8</p>
+        <p>Sample GuestID : {guestSampleId}</p>
       </div>
     </>
   );

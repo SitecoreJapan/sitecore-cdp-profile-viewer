@@ -1,9 +1,6 @@
 // UserProfile.tsx
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { OrdersResponse } from '../interfaces/Orders';
-import { baseUrl, clientKey, apiToken } from '../constants/cdpenv';
-import axios from 'axios';
 import {
   Card,
   CardHeader,
@@ -13,6 +10,9 @@ import {
   Link,
   Button,
 } from '@nextui-org/react';
+import axios from 'axios';
+import { OrdersResponse } from '../interfaces/Orders';
+import { baseUrl, clientKey, apiToken } from '../constants/cdpenv';
 
 const Orders: React.FC = () => {
   const { guestRef } = useParams();
