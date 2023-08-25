@@ -1,4 +1,4 @@
-export interface GuestData {
+export interface GuestResponse {
   guestType: string;
   title: string;
   firstName: string;
